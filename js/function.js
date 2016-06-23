@@ -23,20 +23,18 @@ $(document).ready(function(){
 		return false;
 	});
 
-	$('#f5').click(function actualizar() {
-        // TRAE LOS RECORDATORIOS
-        $.getJSON("http://appmiramevidrieras.esy.es/recordatorios.php", function(resultados){ //resultados, es un array con todos los objetos.
-            for (i= 0; i < resultados.length; i++) { // recorre el array resultados
+	// TRAE LOS RECORDATORIOS
+    $.getJSON("http://appmiramevidrieras.esy.es/recordatorios.php", function(resultados){ //resultados, es un array con todos los objetos.
+        for (i= 0; i < resultados.length; i++) { // recorre el array resultados
 
-                $.each(resultados[i], function(i, campo){ // each, bucle en cada vuelta toma el indice (propiedad) y el campo (valor). Es para recorrer un solo objeto. La "i" de este () no es la misma que del for.
-                    if (i == "title_record") {
-                	   $("#lista").append("<div class='ui-bar ui-bar-a'>" + campo + "</div>");
-                    } else {
-                        $("#lista").append("<p id='body_red' class='ui-body ui-body-a ui-corner-all'>" + campo + "</p>"); // agrego en un div el campo. Aca se puede poner que agregue codigo html.
-                    }
-                });
-            }
-        })
+            $.each(resultados[i], function(i, campo){ // each, bucle en cada vuelta toma el indice (propiedad) y el campo (valor). Es para recorrer un solo objeto. La "i" de este () no es la misma que del for.
+                if (i == "title_record") {
+            	   $("#lista").append("<div class='ui-bar ui-bar-a'>" + campo + "</div>");
+                } else {
+                    $("#lista").append("<p id='body_red' class='ui-body ui-body-a ui-corner-all'>" + campo + "</p>"); // agrego en un div el campo. Aca se puede poner que agregue codigo html.
+                }
+            });
+        }
     });
 
     // TRAE LAS ETAPAS
