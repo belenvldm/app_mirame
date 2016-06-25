@@ -6,7 +6,7 @@ $(document).ready(function(){
 		var datosUsuario = $("#nombredeusuario").val()
 		var datosPassword = $("#clave").val()
 		
-	  	archivoValidacion = "http://appmiramevidrieras.esy.es/validacion_de_datos.php?jsoncallback=?"
+	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/validacion_de_datos.php?jsoncallback=?"
 
 		$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
 		.done(function(respuestaServer) {
@@ -24,7 +24,7 @@ $(document).ready(function(){
 	});
 
 	// TRAE LOS RECORDATORIOS
-    $.getJSON("http://appmiramevidrieras.esy.es/recordatorios.php", function(resultados){ //resultados, es un array con todos los objetos.
+    $.getJSON("http://appmiramevidrieras.esy.es/host/recordatorios.php", function(resultados){ //resultados, es un array con todos los objetos.
         for (i= 0; i < resultados.length; i++) { // recorre el array resultados
 
             $.each(resultados[i], function(i, campo){ // each, bucle en cada vuelta toma el indice (propiedad) y el campo (valor). Es para recorrer un solo objeto. La "i" de este () no es la misma que del for.
@@ -42,7 +42,7 @@ $(document).ready(function(){
     $vuelta = false;
     $string = "";
 
-    $.getJSON("http://appmiramevidrieras.esy.es/etapas.php", function(resultados){ //resultados, es un array con todos los objetos.
+    $.getJSON("http://appmiramevidrieras.esy.es/host/etapas.php", function(resultados){ //resultados, es un array con todos los objetos.
         for (i= 0; i < resultados.length; i++) { // recorre el array resultados
 
             $.each(resultados[i], function(i, campo){ // each, bucle en cada vuelta toma el indice (propiedad) y el campo (valor). Es para recorrer un solo objeto. La "i" de este () no es la misma que del for.
@@ -73,7 +73,7 @@ $(document).ready(function(){
 		var asunto = $("#asunto").val();
 		var pregunta = $("#pregunta").val();
 		
-	  	archivoValidacion = "http://appmiramevidrieras.esy.es/soporte.php?jsoncallback=?"
+	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/soporte.php?jsoncallback=?"
 
 		$.getJSON( archivoValidacion, { asunto:asunto ,pregunta:pregunta})
 		.done(function(respuestaServer) {
@@ -96,7 +96,7 @@ $(document).ready(function(){
 
     function traeConsultas($valMas) {
 
-        archivoConsultas = "http://appmiramevidrieras.esy.es/consultas.php";
+        archivoConsultas = "http://appmiramevidrieras.esy.es/host/consultas.php";
 
         var valor = $valMas;
 
