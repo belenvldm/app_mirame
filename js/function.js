@@ -11,7 +11,7 @@ $(document).ready(function(){
 		$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
 		.done(function(respuestaServer) {
 			
-			respuestaServer.mensaje;
+			//alert(respuestaServer.mensaje);
 			
 			if(respuestaServer.validacion == "ok"){
 
