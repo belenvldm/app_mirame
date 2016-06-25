@@ -1,16 +1,5 @@
 $(document).ready(function(){
 
-    var invocation = new XMLHttpRequest();
-    var url = 'http://appmiramevidrieras.esy.es/host/';
-       
-    function callOtherDomain() {
-      if(invocation) {    
-        invocation.open('GET', url, true);
-        invocation.onreadystatechange = handler;
-        invocation.send(); 
-      }
-    }
-
 	// AUTENTICACION DEL FORMULARIO DE LOGIN
 	$('#formulario').submit(function() {
 		// recolecta los valores que inserto el usuario
