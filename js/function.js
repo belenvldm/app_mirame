@@ -173,7 +173,7 @@ $(document).ready(function(){
         $.getJSON( archivoValidacion, { user:crearUsuario, mail:crearMail, pass:crearPassword, comp:crearEmpresa})
         .done(function(respuestaServer) {
             
-            alert(respuestaServer.mensaje);
+            //alert(respuestaServer.mensaje);
 
             if(respuestaServer.validacion == "ok"){
                 $.mobile.changePage("#loguin");
