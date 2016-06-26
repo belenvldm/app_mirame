@@ -3,7 +3,7 @@ $(document).ready(function(){
     // TRAE VIDEO
     $('#play').click(function traeVideo() {
         $('#reponer').hide();
-        $('#video').attr('src', 'https://www.youtube.com/embed/7n2eWCu0ZR4?rel=0&amp;controls=0&amp;showinfo=0');
+        $('#video').attr('src', 'http://appmiramevidrieras.esy.es/host/bin/videobg.mp4');
     });
 
     $('#video').click(function traeVideo() {
@@ -12,16 +12,16 @@ $(document).ready(function(){
     });
 
 
-	// AUTENTICACION DEL FORMULARIO DE LOGIN
-	$('#formulario').submit(function() {
-		// recolecta los valores que inserto el usuario
-		var datosUsuario = $("#nombredeusuario").val()
-		var datosPassword = $("#clave").val()
-		
-	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/validacion_de_datos.php?jsoncallback=?"
+    // AUTENTICACION DEL FORMULARIO DE LOGIN
+    $('#formulario').submit(function() {
+        // recolecta los valores que inserto el usuario
+        var datosUsuario = $("#nombredeusuario").val()
+        var datosPassword = $("#clave").val()
+        
+        archivoValidacion = "http://appmiramevidrieras.esy.es/host/validacion_de_datos.php?jsoncallback=?"
 
-		$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
-		.done(function(respuestaServer) {
+        $.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
+        .done(function(respuestaServer) {
             
             $mensa = respuestaServer.mensaje;
 
@@ -41,12 +41,12 @@ $(document).ready(function(){
                 $('#datos_inc').append(respuestaServer.mensaje)
             }
         })
-		return false;
-	});
+        return false;
+    });
 
     $aide = localStorage.getItem("id_user");
 
-	// TRAE LOS RECORDATORIOS    
+    // TRAE LOS RECORDATORIOS    
     archivoRecordatorios = "http://appmiramevidrieras.esy.es/host/recordatorios.php"
 
     $.getJSON(archivoRecordatorios, {id:$aide})
@@ -56,7 +56,7 @@ $(document).ready(function(){
 
             $.each(resultados[i], function(i, campo){ // each, bucle en cada vuelta toma el indice (propiedad) y el campo (valor). Es para recorrer un solo objeto. La "i" de este () no es la misma que del for.
                 if (i == "title_record") {
-            	   $("#lista").append("<div class='ui-bar ui-bar-a'>" + campo + "</div>");
+                   $("#lista").append("<div class='ui-bar ui-bar-a'>" + campo + "</div>");
                 } else {
                     $("#lista").append("<p id='body_red' class='ui-body ui-body-a ui-corner-all'>" + campo + "</p>"); // agrego en un div el campo. Aca se puede poner que agregue codigo html.
                 }
@@ -76,21 +76,21 @@ $(document).ready(function(){
         for (i= 0; i < resultados.length; i++) { // recorre el array resultados
 
             $.each(resultados[i], function(i, campo){ // each, bucle en cada vuelta toma el indice (propiedad) y el campo (valor). Es para recorrer un solo objeto. La "i" de este () no es la misma que del for.
-            	if (i == "title_etapa") {
-            		if (campo != $campoAnt) {
+                if (i == "title_etapa") {
+                    if (campo != $campoAnt) {
 
-            			if (!$vuelta) {
-            				$string += "<div id='collaps_etapas' data-role='collapsible' data-collapsed-icon='carat-d' data-expanded-icon='carat-u'> \n <h4 id='title_etapa'>" + campo + "</h4> \n <ul id='ul_etapa' data-role='listview' data-inset='false'>";
+                        if (!$vuelta) {
+                            $string += "<div id='collaps_etapas' data-role='collapsible' data-collapsed-icon='carat-d' data-expanded-icon='carat-u'> \n <h4 id='title_etapa'>" + campo + "</h4> \n <ul id='ul_etapa' data-role='listview' data-inset='false'>";
 
-            				$vuelta = true;
-            			} else {
-            				$string += "</div> \n <div id='collaps_etapas' data-role='collapsible' data-collapsed-icon='carat-d' data-expanded-icon='carat-u'> \n <h4 id='title_etapa'>" + campo + "</h4> \n <ul id='ul_etapa' data-role='listview' data-inset='false'>";
-            			}
-            		}
-                	$campoAnt = campo;
-            	} else {
-                	$string += "<li>" + campo + "</li> \n"; // agrego en un div el campo. Aca se puede poner que agregue codigo html.
-            	}
+                            $vuelta = true;
+                        } else {
+                            $string += "</div> \n <div id='collaps_etapas' data-role='collapsible' data-collapsed-icon='carat-d' data-expanded-icon='carat-u'> \n <h4 id='title_etapa'>" + campo + "</h4> \n <ul id='ul_etapa' data-role='listview' data-inset='false'>";
+                        }
+                    }
+                    $campoAnt = campo;
+                } else {
+                    $string += "<li>" + campo + "</li> \n"; // agrego en un div el campo. Aca se puede poner que agregue codigo html.
+                }
             });
         }
 
@@ -98,28 +98,28 @@ $(document).ready(function(){
     });
 
     // FORMULARIO DE CONSULTAS
-	$('#soporte').submit(function() {
+    $('#soporte').submit(function() {
 
-		var asunto = $("#asunto").val();
-		var pregunta = $("#pregunta").val();
-		
-	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/soporte.php?jsoncallback=?"
+        var asunto = $("#asunto").val();
+        var pregunta = $("#pregunta").val();
+        
+        archivoValidacion = "http://appmiramevidrieras.esy.es/host/soporte.php?jsoncallback=?"
 
-		$.getJSON( archivoValidacion, { asunto:asunto ,pregunta:pregunta})
-		.done(function(respuestaServer) {
-			
-			if(respuestaServer.validacion == "ok"){
-				$print = respuestaServer.consul;
-				$("#cons").append("<li>" + $print + "</li> <br>");
-				$("#cons").listview('refresh');
-			}
-		})
+        $.getJSON( archivoValidacion, { asunto:asunto ,pregunta:pregunta})
+        .done(function(respuestaServer) {
+            
+            if(respuestaServer.validacion == "ok"){
+                $print = respuestaServer.consul;
+                $("#cons").append("<li>" + $print + "</li> <br>");
+                $("#cons").listview('refresh');
+            }
+        })
 
-		$("#asunto").val("");
-		$("#pregunta").val("");
-		
-		return false;
-	});
+        $("#asunto").val("");
+        $("#pregunta").val("");
+        
+        return false;
+    });
 
 
     traeConsultas(0);
@@ -167,28 +167,28 @@ $(document).ready(function(){
     }
 
     // CREAR USUARIO
-    $('#formcrear').submit(function() {
-        // recolecta los valores que inserto el usuario
-        var crearUsuario = $("#namecrear").val();
-        var crearMail = $("#mailcrear").val();
-        var crearPassword = $("#clavecrear").val();
-        var crearEmpresa = $('#empresacrear').val();
+    // $('#formcrear').submit(function() {
+    //     // recolecta los valores que inserto el usuario
+    //     var crearUsuario = $("#namecrear").val();
+    //     var crearMail = $("#mailcrear").val();
+    //     var crearPassword = $("#clavecrear").val();
+    //     var crearEmpresa = $('#empresacrear').val();
         
-        archivoValidacion = "http://appmiramevidrieras.esy.es/host/crearusuarios.php?jsoncallback=?"
+    //     archivoValidacion = "http://appmiramevidrieras.esy.es/host/crearusuarios.php?jsoncallback=?"
 
-        $.getJSON( archivoValidacion, { user:crearUsuario, mail:crearMail, pass:crearPassword, comp:crearEmpresa})
-        .done(function(respuestaServer) {
+    //     $.getJSON( archivoValidacion, { user:crearUsuario, mail:crearMail, pass:crearPassword, comp:crearEmpresa})
+    //     .done(function(respuestaServer) {
             
-            alert(respuestaServer.mensaje);
+    //         alert(respuestaServer.mensaje);
 
-            if(respuestaServer.validacion == "ok"){
-                $.mobile.changePage("#loguin");
-            }else{
-                alert(respuestaServer.mensaje);
-            }
-        })
-        return false;
-    });
+    //         if(respuestaServer.validacion == "ok"){
+    //             $.mobile.changePage("#loguin");
+    //         }else{
+    //             alert(respuestaServer.mensaje);
+    //         }
+    //     })
+    //     return false;
+    // });
 
     // CERRAR LA SESION
     $('#popupDialog #salio').click(function() {
