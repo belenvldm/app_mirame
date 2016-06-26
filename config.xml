@@ -2,7 +2,7 @@
 <!-- el id es el dominio pero invertido con el nombre al final
      la version es de la app -->
 <widget id="es.esy.appmiramevidrieras" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>mirame vidrieras</name> <!-- Nombre de la APP -->
+    <name>mirame vidrieras - test</name> <!-- Nombre de la APP -->
     <description>
         Soporte tecnico <!-- Descripcion en phonegap, si no se especifica otra en el appleStore o googleStore, va a aparecer esta descripcion -->
     </description>
@@ -11,10 +11,10 @@
     </author>
     
     <preference name="permissions" value="none" />
-    <preference name="phonegap-version" value="3.7.0" /> <!-- Version en la que se va a compilar, se puede elegir en base a lo que uno usa -->
+    <preference name="phonegap-version" value="5.2.0" /> <!-- Version en la que se va a compilar, se puede elegir en base a lo que uno usa -->
     <preference name="orientation" value="default" />  <!-- default es portait -->
     <preference name="target-device" value="universal" /> <!-- si es para ciertos dispositivos -->
-    <preference name="fullscreen" value="true" /> <!-- si es full o no, si se ve el reloj y demas -->
+    <preference name="fullscreen" value="false" /> <!-- si es full o no, si se ve el reloj y demas -->
     <preference name="webviewbounce" value="true" /> 
     <preference name="prerendered-icon" value="true" />
     <preference name="stay-in-webview" value="false" />
@@ -26,9 +26,6 @@
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
-    
-    <!-- Plugin: Funcionalidad no realizable en HTML, es algo aparte -->
-    <gap:plugin name="org.apache.cordova.device-orientation" /> <!-- Hay que especificar los plugins que se vayan a utilizar -->
     
     <!-- <icon src="icon.png" /> --> <!-- Icono por default de la app -->
     <!-- Variacion del icono por plataformas y medidas -->

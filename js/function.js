@@ -3,7 +3,7 @@ $(document).ready(function(){
     // TRAE VIDEO
     $('#play').click(function traeVideo() {
         $('#reponer').hide();
-        $('#video').attr('src', 'video/videobg.mp4');
+        $('#video').attr('src', 'https://www.youtube.com/embed/7n2eWCu0ZR4?rel=0&amp;controls=0&amp;showinfo=0');
     });
 
     $('#video').click(function traeVideo() {
@@ -18,7 +18,7 @@ $(document).ready(function(){
 		var datosUsuario = $("#nombredeusuario").val()
 		var datosPassword = $("#clave").val()
 		
-	  	archivoValidacion = "http://localhost/app_mirame/host/validacion_de_datos.php?jsoncallback=?"
+	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/validacion_de_datos.php?jsoncallback=?"
 
 		$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
 		.done(function(respuestaServer) {
@@ -47,7 +47,7 @@ $(document).ready(function(){
     $aide = localStorage.getItem("id_user");
 
 	// TRAE LOS RECORDATORIOS    
-    archivoRecordatorios = "http://localhost/app_mirame/host/recordatorios.php"
+    archivoRecordatorios = "http://appmiramevidrieras.esy.es/host/recordatorios.php"
 
     $.getJSON(archivoRecordatorios, {id:$aide})
     .done(function(resultados){ //resultados, es un array con todos los objetos.
@@ -69,7 +69,7 @@ $(document).ready(function(){
     $vuelta = false;
     $string = "";
 
-    archivoEtapas = "http://localhost/app_mirame/host/etapas.php";
+    archivoEtapas = "http://appmiramevidrieras.esy.es/host/etapas.php";
 
     $.getJSON(archivoEtapas, {id:$aide})
     .done(function(resultados){ //resultados, es un array con todos los objetos.
@@ -103,7 +103,7 @@ $(document).ready(function(){
 		var asunto = $("#asunto").val();
 		var pregunta = $("#pregunta").val();
 		
-	  	archivoValidacion = "http://localhost/app_mirame/host/soporte.php?jsoncallback=?"
+	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/soporte.php?jsoncallback=?"
 
 		$.getJSON( archivoValidacion, { asunto:asunto ,pregunta:pregunta})
 		.done(function(respuestaServer) {
@@ -129,7 +129,7 @@ $(document).ready(function(){
         var valor = $valMas;
         var hay = false;
 
-        archivoConsultas = "http://localhost/app_mirame/host/consultas.php";
+        archivoConsultas = "http://appmiramevidrieras.esy.es/host/consultas.php";
 
         $.getJSON(archivoConsultas, {mas:valor, id:$aide})
         .done(function(resultados) {
@@ -174,7 +174,7 @@ $(document).ready(function(){
         var crearPassword = $("#clavecrear").val();
         var crearEmpresa = $('#empresacrear').val();
         
-        archivoValidacion = "http://localhost/app_mirame/host/crearusuarios.php?jsoncallback=?"
+        archivoValidacion = "http://appmiramevidrieras.esy.es/host/crearusuarios.php?jsoncallback=?"
 
         $.getJSON( archivoValidacion, { user:crearUsuario, mail:crearMail, pass:crearPassword, comp:crearEmpresa})
         .done(function(respuestaServer) {
