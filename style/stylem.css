@@ -41,6 +41,22 @@ div#img_video img {
     width: 100%;
 }
 
+button#play {
+    position: absolute;
+    top: 44%;
+    left: 40%;
+    width: 18%;
+    height: 10%;
+}
+
+button#play:after {
+    width: 4em;
+    height: 3em;
+    left: 23%;
+    top: 30%;
+    background-size: contain;
+}
+
 video#video {
 	height: 100%;
     position: fixed;

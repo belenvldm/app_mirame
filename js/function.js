@@ -1,30 +1,57 @@
 $(document).ready(function(){
 
+    // TRAE VIDEO
+    $('#play').click(function traeVideo() {
+        $('#reponer').hide();
+        $('#video').attr('src', '../host/bin/videobg.mp4');
+    });
+
+    $('#video').click(function traeVideo() {
+        $('#video').hide();
+        $('#reponer').show();
+    });
+
+
 	// AUTENTICACION DEL FORMULARIO DE LOGIN
 	$('#formulario').submit(function() {
 		// recolecta los valores que inserto el usuario
 		var datosUsuario = $("#nombredeusuario").val()
 		var datosPassword = $("#clave").val()
 		
-	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/validacion_de_datos.php?jsoncallback=?"
+	  	archivoValidacion = "http://localhost/app_mirame/host/validacion_de_datos.php?jsoncallback=?"
 
 		$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
 		.done(function(respuestaServer) {
-			
-			//alert(respuestaServer.mensaje);
-			
-			if(respuestaServer.validacion == "ok"){
+            
+            $mensa = respuestaServer.mensaje;
 
-				$.mobile.changePage("#recordatorios");
-			}else{
-                alert("no es correcto");
-			}
-		})
+            for (i= 0; i < $mensa.length; i++) { 
+
+                $.each($mensa[i], function(i, campo) {
+
+                    if (i == "id") {
+                        localStorage.setItem("id_user", campo);
+                    }
+                });
+            }
+
+            if(respuestaServer.validacion == "ok"){
+                $.mobile.changePage("#recordatorios");
+            }else{
+                $('#datos_inc').append(respuestaServer.mensaje)
+            }
+        })
 		return false;
 	});
 
-	// TRAE LOS RECORDATORIOS
-    $.getJSON("http://appmiramevidrieras.esy.es/host/recordatorios.php", function(resultados){ //resultados, es un array con todos los objetos.
+    $aide = localStorage.getItem("id_user");
+
+	// TRAE LOS RECORDATORIOS    
+    archivoRecordatorios = "http://localhost/app_mirame/host/recordatorios.php"
+
+    $.getJSON(archivoRecordatorios, {id:$aide})
+    .done(function(resultados){ //resultados, es un array con todos los objetos.
+        
         for (i= 0; i < resultados.length; i++) { // recorre el array resultados
 
             $.each(resultados[i], function(i, campo){ // each, bucle en cada vuelta toma el indice (propiedad) y el campo (valor). Es para recorrer un solo objeto. La "i" de este () no es la misma que del for.
@@ -42,7 +69,10 @@ $(document).ready(function(){
     $vuelta = false;
     $string = "";
 
-    $.getJSON("http://appmiramevidrieras.esy.es/host/etapas.php", function(resultados){ //resultados, es un array con todos los objetos.
+    archivoEtapas = "http://localhost/app_mirame/host/etapas.php";
+
+    $.getJSON(archivoEtapas, {id:$aide})
+    .done(function(resultados){ //resultados, es un array con todos los objetos.
         for (i= 0; i < resultados.length; i++) { // recorre el array resultados
 
             $.each(resultados[i], function(i, campo){ // each, bucle en cada vuelta toma el indice (propiedad) y el campo (valor). Es para recorrer un solo objeto. La "i" de este () no es la misma que del for.
@@ -73,7 +103,7 @@ $(document).ready(function(){
 		var asunto = $("#asunto").val();
 		var pregunta = $("#pregunta").val();
 		
-	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/soporte.php?jsoncallback=?"
+	  	archivoValidacion = "http://localhost/app_mirame/host/soporte.php?jsoncallback=?"
 
 		$.getJSON( archivoValidacion, { asunto:asunto ,pregunta:pregunta})
 		.done(function(respuestaServer) {
@@ -96,19 +126,18 @@ $(document).ready(function(){
 
     function traeConsultas($valMas) {
 
-        archivoConsultas = "http://appmiramevidrieras.esy.es/host/consultas.php";
-
         var valor = $valMas;
 
-        $.getJSON( archivoConsultas, { mas:valor})
+        archivoConsultas = "http://localhost/app_mirame/host/consultas.php";
+
+        $.getJSON(archivoConsultas, {mas:valor, id:$aide})
         .done(function(resultados) {
-                
+            
             for (i= 0; i < resultados.length; i++) {
 
                 $.each(resultados[i], function(propiedad, campo){
                 
                     if (campo != "") {
-
                         if (propiedad == "R") {
                             $("#cons").append("<li id='"+ i +"'><textarea rows='20' cols='7' id='body_res' class='ui-body ui-body-a body_res' readonly>" + campo + "</textarea></li>");
                         } else {
@@ -130,16 +159,4 @@ $(document).ready(function(){
             }
         });
     }
-
-
-    // TRAE RESPUESTAS
-    // $.getJSON("http://localhost/app_mirame/host/respuestas.php", function(resultados){ //resultados, es un array con todos los objetos.
-    //     for (i= 0; i < resultados.length; i++) { // recorre el array resultados
-
-    //         $.each(resultados[i], function(i, campo){ // each, bucle en cada vuelta toma el indice (propiedad) y el campo (valor). Es para recorrer un solo objeto. La "i" de este () no es la misma que del for.
-
-    //         	$("#rta").append("<p id='body_red' class='ui-body ui-body-a ui-corner-all'>" + campo + "</p>"); // agrego en un div el campo. Aca se puede poner que agregue codigo html.
-    //         });
-    //     }
-    // });
 });

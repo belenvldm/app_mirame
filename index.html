@@ -19,22 +19,27 @@
 <div id="home" data-theme="a" class="home bg ui-page-theme-a" data-role="page" data-transition="slide">
 	<div id="content" class="content" data-role="content">
 
-		<!-- <video id="video" autoplay muted loop poster="../host/bin/poster.jpg">
-		  <source src="../host/bin/videobg.mp4" type="video/mp4">
-		</video> -->
-		<div id="img_video">
-			<img src="img/img_vid.jpg">
-		</div>
+		<video id="video" autoplay muted loop>
+		  <source type="video/mp4">
+		</video>
 
-		<div id="logo" class="logo"></div>
+		<div id="reponer" class="reponer">
 
-		<div id="registrar" class="registrar">
-			<a href="#create">Crear cuenta</a>
-		</div>
+			<div id="logo" class="logo"></div>
+			
+			<div id="registrar" class="registrar">
+				<a href="#create">Crear cuenta</a>
+			</div>
+			
+			<div id="iniciar" class="iniciar">
+				<h1>Bienvenido a mirame</h1>
+				<a href="#loguin" id="comenzar" class="ui-btn ui-btn-inline ui-icon-arrow-r ui-corner-all ui-btn-icon-right">Comenzar</a>
+			</div>
 
-		<div id="iniciar" class="iniciar">
-			<h1>Bienvenido a mirame</h1>
-			<a href="#loguin" id="comenzar" class="ui-btn ui-btn-inline ui-icon-arrow-r ui-corner-all ui-btn-icon-right">Comenzar</a>
+			<div id="img_video">
+				<button id="play" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-video ui-btn-icon-notext">video</button>
+				<img src="img/img_vid.jpg">
+			</div>
 		</div>
 	</div>
 </div>
@@ -89,6 +94,8 @@
 
      		<a href="#" id="olvido" class="olvido">Olvido su contraseña?</a>
       	</form>
+
+      	<div id="datos_inc" class="datos_inc"></div>
 	</div>
 </div>
 <!-- *!. LOGUIN ..* -->
