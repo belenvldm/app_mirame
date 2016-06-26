@@ -3,7 +3,7 @@ $(document).ready(function(){
     // TRAE VIDEO
     $('#play').click(function traeVideo() {
         $('#reponer').hide();
-        $('#video').attr('src', 'http://appmiramevidrieras.esy.es/host/bin/videobg.mp4');
+        $('#video').attr('src', 'video/videobg.mp4');
     });
 
     $('#video').click(function traeVideo() {
@@ -18,7 +18,7 @@ $(document).ready(function(){
 		var datosUsuario = $("#nombredeusuario").val()
 		var datosPassword = $("#clave").val()
 		
-	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/validacion_de_datos.php?jsoncallback=?"
+	  	archivoValidacion = "http://localhost/app_mirame/host/validacion_de_datos.php?jsoncallback=?"
 
 		$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
 		.done(function(respuestaServer) {
@@ -47,11 +47,11 @@ $(document).ready(function(){
     $aide = localStorage.getItem("id_user");
 
 	// TRAE LOS RECORDATORIOS    
-    archivoRecordatorios = "http://appmiramevidrieras.esy.es/host/recordatorios.php"
+    archivoRecordatorios = "http://localhost/app_mirame/host/recordatorios.php"
 
     $.getJSON(archivoRecordatorios, {id:$aide})
     .done(function(resultados){ //resultados, es un array con todos los objetos.
-        
+
         for (i= 0; i < resultados.length; i++) { // recorre el array resultados
 
             $.each(resultados[i], function(i, campo){ // each, bucle en cada vuelta toma el indice (propiedad) y el campo (valor). Es para recorrer un solo objeto. La "i" de este () no es la misma que del for.
@@ -69,7 +69,7 @@ $(document).ready(function(){
     $vuelta = false;
     $string = "";
 
-    archivoEtapas = "http://appmiramevidrieras.esy.es/host/etapas.php";
+    archivoEtapas = "http://localhost/app_mirame/host/etapas.php";
 
     $.getJSON(archivoEtapas, {id:$aide})
     .done(function(resultados){ //resultados, es un array con todos los objetos.
@@ -103,7 +103,7 @@ $(document).ready(function(){
 		var asunto = $("#asunto").val();
 		var pregunta = $("#pregunta").val();
 		
-	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/soporte.php?jsoncallback=?"
+	  	archivoValidacion = "http://localhost/app_mirame/host/soporte.php?jsoncallback=?"
 
 		$.getJSON( archivoValidacion, { asunto:asunto ,pregunta:pregunta})
 		.done(function(respuestaServer) {
@@ -127,16 +127,20 @@ $(document).ready(function(){
     function traeConsultas($valMas) {
 
         var valor = $valMas;
+        var hay = false;
 
-        archivoConsultas = "http://appmiramevidrieras.esy.es/host/consultas.php";
+        archivoConsultas = "http://localhost/app_mirame/host/consultas.php";
 
         $.getJSON(archivoConsultas, {mas:valor, id:$aide})
         .done(function(resultados) {
-            
+
+            if (resultados.length > 4) {
+                hay = true;
+            }
+
             for (i= 0; i < resultados.length; i++) {
 
                 $.each(resultados[i], function(propiedad, campo){
-                
                     if (campo != "") {
                         if (propiedad == "R") {
                             $("#cons").append("<li id='"+ i +"'><textarea rows='20' cols='7' id='body_res' class='ui-body ui-body-a body_res' readonly>" + campo + "</textarea></li>");
@@ -149,14 +153,46 @@ $(document).ready(function(){
                 });
             }
 
-            $("#cons").append("<li id='anteriores'>Consultas anteriores</li>").on("click", function (){
+            if (hay == true) {
 
-                traeConsultas(1);
-            });
+                $("#cons").append("<li id='anteriores'>Consultas anteriores</li>").on("click", function (){
+                    traeConsultas(1);
+                });
+            }
 
             if (valor == 1) {
                 $("#anteriores").remove();
             }
         });
     }
+
+    // CREAR USUARIO
+    $('#formcrear').submit(function() {
+        // recolecta los valores que inserto el usuario
+        var crearUsuario = $("#namecrear").val();
+        var crearMail = $("#mailcrear").val();
+        var crearPassword = $("#clavecrear").val();
+        var crearEmpresa = $('#empresacrear').val();
+        
+        archivoValidacion = "http://localhost/app_mirame/host/crearusuarios.php?jsoncallback=?"
+
+        $.getJSON( archivoValidacion, { user:crearUsuario, mail:crearMail, pass:crearPassword, comp:crearEmpresa})
+        .done(function(respuestaServer) {
+            
+            alert(respuestaServer.mensaje);
+
+            if(respuestaServer.validacion == "ok"){
+                $.mobile.changePage("#loguin");
+            }else{
+                alert(respuestaServer.mensaje);
+            }
+        })
+        return false;
+    });
+
+    // CERRAR LA SESION
+    $('#popupDialog #salio').click(function() {
+        localStorage.clear();
+        $.mobile.changePage("#home");
+    })
 });

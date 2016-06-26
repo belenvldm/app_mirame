@@ -138,6 +138,10 @@ form#formulario div:nth-child(3) {
 /*!. LOGUIN ..*/
 
 /*.. RECORDATORIOS ..*/
+button#f5 {
+    left: 90%;
+}
+
 h1#rec {
     margin: 0 28%;
 }
