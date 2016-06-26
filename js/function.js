@@ -159,4 +159,28 @@ $(document).ready(function(){
             }
         });
     }
+
+    // CREAR USUARIO
+    $('#formcrear').submit(function() {
+        // recolecta los valores que inserto el usuario
+        var crearUsuario = $("#namecrear").val();
+        var crearMail = $("#mailcrear").val();
+        var crearPassword = $("#clavecrear").val();
+        var crearEmpresa = $('#empresacrear').val();
+        
+        archivoValidacion = "http://appmiramevidrieras.esy.es/host/crearusuarios.php?jsoncallback=?"
+
+        $.getJSON( archivoValidacion, { user:crearUsuario, mail:crearMail, pass:crearPassword, comp:crearEmpresa})
+        .done(function(respuestaServer) {
+            
+            alert(respuestaServer.mensaje);
+
+            if(respuestaServer.validacion == "ok"){
+                $.mobile.changePage("#loguin");
+            }else{
+                alert(respuestaServer.mensaje);
+            }
+        })
+        return false;
+    });
 });
