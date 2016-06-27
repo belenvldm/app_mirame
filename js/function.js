@@ -3,7 +3,7 @@ $(document).ready(function(){
     // TRAE VIDEO
     $('#play').click(function traeVideo() {
         $('#reponer').hide();
-        $('#video').attr('src', 'video/videobg.ogv');
+        $('#video').attr('src', 'video/videobg.flv');
     });
 
     $('#video').click(function traeVideo() {
