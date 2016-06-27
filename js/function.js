@@ -93,7 +93,7 @@ $(document).ready(function(){
 		
 	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/soporte.php?jsoncallback=?"
 
-		$.getJSON( archivoValidacion, { asunto:asunto ,pregunta:pregunta})
+		$.getJSON( archivoValidacion, { asunto:asunto, pregunta:pregunta})
 		.done(function(respuestaServer) {
 			
 			if(respuestaServer.validacion == "ok"){
