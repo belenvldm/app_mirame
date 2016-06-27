@@ -1,15 +1,15 @@
 $(document).ready(function(){
 
     // TRAE VIDEO
-    $('#play').click(function traeVideo() {
-        $('#reponer').hide();
-        $('#video').attr('src', 'video/videobg.flv');
-    });
+    // $('#play').click(function traeVideo() {
+    //     $('#reponer').hide();
+    //     $('#video').attr('src', 'video/videobg.flv');
+    // });
 
-    $('#video').click(function traeVideo() {
-        $('#video').hide();
-        $('#reponer').show();
-    });
+    // $('#video').click(function traeVideo() {
+    //     $('#video').hide();
+    //     $('#reponer').show();
+    // });
 
 
 	// AUTENTICACION DEL FORMULARIO DE LOGIN
@@ -182,5 +182,11 @@ $(document).ready(function(){
             }
         })
         return false;
-    });    
+    });
+
+    // CERRAR LA SESION
+    $('#popupDialog #salio').click(function() {
+        localStorage.clear();
+        $.mobile.changePage("#home");
+    });
 });
