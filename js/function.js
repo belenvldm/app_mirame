@@ -3,12 +3,11 @@ $(document).ready(function(){
     // TRAE VIDEO
     $('#play').click(function traeVideo() {
         $('#reponer').hide();
-        // $('#video').attr('src', 'http://appmiramevidrieras.esy.es/host/bin/videobg.mp4');
-        $('#ifra').attr('src', 'http://player.vimeo.com/video/41135183');
+        $('#video').attr('src', 'video/videobg.ogv');
     });
 
     $('#video').click(function traeVideo() {
-        $('#ifra').hide();
+        $('#video').hide();
         $('#reponer').show();
     });
 
