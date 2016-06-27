@@ -105,7 +105,7 @@ $(document).ready(function(){
 		
 	  	archivoValidacion = "http://appmiramevidrieras.esy.es/host/soporte.php?jsoncallback=?"
 
-		$.getJSON( archivoValidacion, { asunto:asunto ,pregunta:pregunta})
+		$.getJSON( archivoValidacion, { asunto:asunto ,pregunta:pregunta, id:$aide})
 		.done(function(respuestaServer) {
 			
 			if(respuestaServer.validacion == "ok"){
@@ -140,6 +140,8 @@ $(document).ready(function(){
                     if (campo != "") {
                         if (propiedad == "R") {
                             $("#cons").append("<li id='"+ i +"'><textarea rows='20' cols='7' id='body_res' class='ui-body ui-body-a body_res' readonly>" + campo + "</textarea></li>");
+                        } else if (propiedad == "asuntin") {
+                            $("#cons").append("<li>" + campo + "</li>");
                         } else {
                             $("#cons").append("<li><textarea rows='20' cols='7' id='body_preg' class='ui-body ui-body-a body_preg' readonly>" + campo + "</textarea></li>");
                         }
