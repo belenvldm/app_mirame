@@ -1,17 +1,5 @@
 $(document).ready(function(){
 
-    // TRAE VIDEO
-    // $('#play').click(function traeVideo() {
-    //     $('#reponer').hide();
-    //     $('#video').attr('src', 'video/videobg.flv');
-    // });
-
-    // $('#video').click(function traeVideo() {
-    //     $('#video').hide();
-    //     $('#reponer').show();
-    // });
-
-
 	// AUTENTICACION DEL FORMULARIO DE LOGIN
 	$('#formulario').submit(function() {
 		// recolecta los valores que inserto el usuario
